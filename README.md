@@ -8,4 +8,4 @@ In this demo and PoC around Bitswap, we show as will work 'swaps' into DEX, but 
 
 ## Demo Video
 
-[!Demo video](https://github.com/BitSwap-BiFi/Bitswap-PoC/blob/main/demo-video/Bitswap-demo.gif)
+![Demo video](https://github.com/BitSwap-BiFi/Bitswap-PoC/blob/main/demo-video/Bitswap-demo.gif)
