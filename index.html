@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <link rel="icon" href="https://beta.bitmatrix.app/favicon.ico"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="theme-color" content="#000000"/>
+  <meta name="title" content="Bitmatrix App"/>
+  <meta name="description" content="Swap assets, add liquidity, and view tL-BTC/tL-USDt pool metrics."/>
+  <link rel="apple-touch-icon" href="https://beta.bitmatrix.app/logo192.png"/>
+  <link rel="manifest" href="https://beta.bitmatrix.app/manifest.json"/>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KSWY65FWFK"></script>
+  <script>
+    function gtag(){dataLayer.push(arguments)}
+    window.dataLayer = window.dataLayer || [];
+    gtag("js", new Date);
+    gtag("config", "G-KSWY65FWFK");
+  </script>
+  <link href="https://beta.bitmatrix.app/static/css/2.32df3fda.chunk.css" rel="stylesheet">
+  <link href="https://beta.bitmatrix.app/static/css/main.3c6b9128.chunk.css" rel="stylesheet">
+</head>
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root">
+    <h1>Swap BTC to USDT</h1>
+    <input type="number" id="btcAmount" placeholder="BTC amount" />
+    <button id="swapButton">Swap</button>
+    <p id="result"></p>
+  </div>
+  <script>
+    // Fetch the necessary elements
+    const btcAmountInput = document.getElementById('btcAmount');
+    const swapButton = document.getElementById('swapButton');
+    const resultText = document.getElementById('result');
+
+    // Function to handle the swap
+    function swap() {
+      const btcAmount = btcAmountInput.value;
+
+      // Replace the following lines with your actual swap implementation
+
+      // Simulate a network request
+      setTimeout(() => {
+        // Successful swap
+        const usdtAmount = btcAmount * 50000;
+        resultText.textContent = `You will receive ${usdtAmount} USDT.`;
+      }, 2000);
+    }
+
+    // Add event listener to the swap button
+    swapButton.addEventListener('click', swap);
+  </script>
+  <script src="https://beta.bitmatrix.app/static/js/2.d978da85.chunk.js"></script>
+  <script src="https://beta.bitmatrix.app/static/js/main.0706ae5d.chunk.js"></script>
+</body>
+</html>
