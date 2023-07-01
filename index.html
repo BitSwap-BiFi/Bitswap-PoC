@@ -1,56 +1,145 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="utf-8"/>
-  <link rel="icon" href="https://beta.bitmatrix.app/favicon.ico"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <meta name="theme-color" content="#000000"/>
-  <meta name="title" content="Bitmatrix App"/>
-  <meta name="description" content="Swap assets, add liquidity, and view tL-BTC/tL-USDt pool metrics."/>
-  <link rel="apple-touch-icon" href="https://beta.bitmatrix.app/logo192.png"/>
-  <link rel="manifest" href="https://beta.bitmatrix.app/manifest.json"/>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KSWY65FWFK"></script>
-  <script>
-    function gtag(){dataLayer.push(arguments)}
-    window.dataLayer = window.dataLayer || [];
-    gtag("js", new Date);
-    gtag("config", "G-KSWY65FWFK");
-  </script>
-  <link href="https://beta.bitmatrix.app/static/css/2.32df3fda.chunk.css" rel="stylesheet">
-  <link href="https://beta.bitmatrix.app/static/css/main.3c6b9128.chunk.css" rel="stylesheet">
+  <title>Bitswap</title>
+  <style>
+    body {
+      background-color: #0d0d0d;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .logo {
+      font-size: 30px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .button {
+      background-color: #f7dc7c;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 10px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    .button:hover {
+      background-color: #f7dc7c;
+    }
+
+    .form-container {
+      background-color: #1f1f1f;
+      border-radius: 4px;
+      padding: 20px;
+      margin-top: 20px;
+    }
+
+    .form-header {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .form-input {
+      border: none;
+      border-radius: 4px;
+      padding: 10px;
+      font-size: 16px;
+      margin-bottom: 20px;
+      width: 100%;
+    }
+
+    .form-submit {
+      background-color: #f7dc7c;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 10px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    .form-submit:hover {
+      background-color: #ff0055;
+    }
+  </style>
 </head>
 <body>
-  <noscript>You need to enable JavaScript to run this app.</noscript>
-  <div id="root">
-    <h1>Swap BTC to USDT</h1>
-    <input type="number" id="btcAmount" placeholder="BTC amount" />
-    <button id="swapButton">Swap</button>
-    <p id="result"></p>
+  <div class="header">
+    <div class="logo">Bitswap</div>
+    <button class="button">Connect Wallet</button>
   </div>
+  <div class="form-container">
+    <div class="form-header">Swap</div>
+    <div class="form-row">
+      <div class="form-label">From:</div>
+      <input id="btcInput" class="form-input" type="text" placeholder="0.1 BTC">
+      <button class="form-input">select token</button>
+    </div>
+    <div class="form-row">
+      <div class="form-label">To:</div>
+      <input id="usdtInput" class="form-input" type="text" placeholder="2000 USDT">
+    </div>
+    <button id="swapButton" class="form-submit">Swap</button>
+  </div>
+  <div style="margin-top: 20px; font-size: 14px; text-align: center;">
+    <p><em>Disclaimer: Alpha software - Use at own risk</em></p>
+  </div>
+
   <script>
-    // Fetch the necessary elements
-    const btcAmountInput = document.getElementById('btcAmount');
-    const swapButton = document.getElementById('swapButton');
-    const resultText = document.getElementById('result');
+    // Function to get the exchange rate between BTC and USDT
+    function getExchangeRate() {
+    const apiPath = 'v2/auth/r/orders/tBTCUSD/hist' // or 'v2/auth/r/orders/hist'
+fetch(`https://api.bitfinex.com/${apiPath}`, {
+  method:'POST',
+  body: JSON.stringify({}),
+  headers: {
+    /* auth headers */
+  }
+})
+.then(res => res.json())
+.then(json => console.log(json))
 
-    // Function to handle the swap
-    function swap() {
-      const btcAmount = btcAmountInput.value;
+      const btcToUsdtRate = 35000; // Dummy value, replace with actual exchange rate
 
-      // Replace the following lines with your actual swap implementation
+      return btcToUsdtRate;
+    }
 
-      // Simulate a network request
-      setTimeout(() => {
-        // Successful swap
-        const usdtAmount = btcAmount * 50000;
-        resultText.textContent = `You will receive ${usdtAmount} USDT.`;
-      }, 2000);
+    // Function to handle the swap button click event
+    function handleSwap() {
+      const btcInput = document.getElementById('btcInput');
+      const usdtInput = document.getElementById('usdtInput');
+
+      const btcAmount = parseFloat(btcInput.value);
+      const exchangeRate = getExchangeRate();
+
+      const usdtAmount = btcAmount * exchangeRate;
+
+      usdtInput.value = usdtAmount.toFixed(2); // Display the calculated USDT amount
     }
 
     // Add event listener to the swap button
-    swapButton.addEventListener('click', swap);
+    const swapButton = document.getElementById('swapButton');
+    swapButton.addEventListener('click', handleSwap);
   </script>
-  <script src="https://beta.bitmatrix.app/static/js/2.d978da85.chunk.js"></script>
-  <script src="https://beta.bitmatrix.app/static/js/main.0706ae5d.chunk.js"></script>
 </body>
 </html>
