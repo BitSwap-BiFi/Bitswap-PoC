@@ -4,7 +4,7 @@ Proof of Concept on Bitswap
 
 ## How works?
 
-In this demo and PoC around Bitswap, we show as will work 'swaps' into DEX, but without AMM or LP for while
+In this demo and PoC around Bitswap, we show as will work 'swaps' into DEX
 
 ## Demo Video
 
